@@ -32,13 +32,17 @@ export default {
   },
   methods: {
     async registerSubmit () {
-      console.log(111)
       const rulg = /^.{6,16}$/
       if (rulg.test(this.model.name) && rulg.test(this.model.username) && rulg.test(this.model.password)) {
         // 通过正则校验 接口调用
         const res = await this.$http.post('/register', this.model)
         console.log(res)
         this.$msg.fail(res.data.msg)
+        localStorage.setItem('id', res.data.id)
+        localStorage.setItem('token', res.data.objtoken)
+        setTimeout(() => {
+          this.$router.push('/userinfo')
+        }, 1e3)
       } else {
         this.$msg.fail('注册失败')
       }

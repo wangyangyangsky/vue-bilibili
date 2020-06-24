@@ -28,7 +28,6 @@ export default {
   },
   methods: {
     async registerSubmit () {
-      console.log(111)
       const rulg = /^.{6,16}$/
       if (rulg.test(this.model.username) && rulg.test(this.model.password)) {
         // 通过正则校验 接口调用
