@@ -4,7 +4,7 @@
       <div class="mainInfo">
         <img src="@/assets/bannerTop_new.png" style="width:100%;height:34.667vw" alt="">
       </div>
-      <user-detail></user-detail>
+      <user-detail :userInfo="model"></user-detail>
     </div>
 </template>
 <script>
@@ -13,6 +13,11 @@ import navBar from '../components/common/navBar.vue'
 import userDetail from '../components/userComponents/userDetail.vue'
 
 export default {
+  data () {
+    return {
+      model: {}
+    }
+  },
   components: {
     navBar,
     userDetail
@@ -29,6 +34,7 @@ export default {
         }
       })
       console.log(res)
+      this.model = res.data[0]
     }
   }
 }

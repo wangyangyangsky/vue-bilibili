@@ -32,8 +32,16 @@ export default {
       if (rulg.test(this.model.username) && rulg.test(this.model.password)) {
         // 通过正则校验 接口调用
         const res = await this.$http.post('/login', this.model)
-        console.log(res)
         this.$msg.fail(res.data.msg)
+        if (res.data.code === 301 || res.data.code === 302) {
+          // 重定向
+          return
+        }
+        localStorage.setItem('id', res.data.id)
+        localStorage.setItem('token', res.data.token)
+        setTimeout(() => {
+          this.$router.push('/userinfo')
+        }, 1e3)
       } else {
         this.$msg.fail('注册失败')
       }

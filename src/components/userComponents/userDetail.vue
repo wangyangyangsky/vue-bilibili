@@ -1,6 +1,7 @@
 <template>
   <div class="userDetail">
-    <img class="userLogo" src="@/assets/head_img.jpg" alt />
+    <img v-if="userInfo.user_img" class="userLogo" src="@/assets/head_img.jpg" alt />
+    <img v-else class="userLogo" src="@/assets/head_img.jpg" alt />
     <div class="relation">
       <div class="num">
         <span class="focus">
@@ -18,15 +19,16 @@
           <span>获赞</span>
         </span>
       </div>
-      <button>编辑资料</button>
+      <button @click="$router.push('/edit')">编辑资料</button>
     </div>
     <div class="intro">
       <div class="base">
-        <span>王小洋sky</span>
+        <span>{{userInfo.name}}</span>
       </div>
-      <span class="desc">这个人很神秘，什么都没有写</span>
+      <span class="desc" v-if="userInfo.user_desc">{{userInfo.user_desc}}</span>
+      <span class="desc" v-else>这个人很神秘，什么都没有写</span>
       <a class="packUp" @click="pack" :status="status">{{packStatus[status]}}</a>
-      <span class="uid" v-show="status">uid:111111111</span>
+      <span class="uid" v-show="status">uid:{{userInfo.id}}</span>
     </div>
     <div class="tabs">
       <span>动态</span>
@@ -40,9 +42,13 @@ export default {
   data () {
     return {
       packStatus: ['展开', '收起'],
-      status: 0
+      status: 0,
+      showEdit: 0
     }
   },
+  props: [
+    'userInfo'
+  ],
   methods: {
     pack () {
       if (this.status === 0) {

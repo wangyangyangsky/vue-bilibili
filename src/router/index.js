@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import register from '../views/register.vue'
 import login from '../views/login.vue'
 import userinfo from '../views/userinfo.vue'
+import edit from '../views/edit.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/userinfo',
     name: 'userinfo',
     component: userinfo
+  },
+  {
+    path: '/edit',
+    name: 'edit',
+    component: edit
   }
   // {
   //   path: '/about',
