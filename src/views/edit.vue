@@ -12,7 +12,7 @@
       </tr>
       <tr>
         <td>昵称</td>
-        <td>{{model.username}}</td>
+        <td @click="changeShow(1)">{{model.username}}</td>
       </tr>
       <tr>
         <td>UID</td>
@@ -29,7 +29,7 @@
       </tr>
       <tr>
         <td>个性签名</td>
-        <td>{{model.user_desc}}</td>
+        <td @click="changeShow(2)">{{model.user_desc}}</td>
       </tr>
     </table>
 
@@ -37,6 +37,10 @@
       <a>退出登录</a>
       <a @click="$router.back()">返回空间</a>
     </div>
+
+    <van-dialog v-model="show" title="请填入要修改的内容" show-cancel-button @confirm = "confirmClick">
+      <van-field v-model="content" autofocus />
+    </van-dialog>
   </div>
 </template>
 
@@ -45,7 +49,10 @@ import NavBar from '../components/common/navBar.vue'
 export default {
   data () {
     return {
-      model: {}
+      model: {},
+      show: false,
+      content: '',
+      temp: 0
     }
   },
   components: {
@@ -79,6 +86,19 @@ export default {
       if (res.data.code === 200) {
         this.$msg.fail('修改成功')
       }
+    },
+    changeShow (index) {
+      this.show = true
+      this.temp = index
+      this.content = ''
+    },
+    confirmClick () {
+      if (this.temp === 1) {
+        this.model.username = this.content
+      } else if (this.temp === 2) {
+        this.model.user_desc = this.content
+      }
+      this.UserUpdate()
     }
   }
 }

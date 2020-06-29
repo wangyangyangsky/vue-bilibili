@@ -6,7 +6,7 @@ import http from './http'
 
 // import Vant from 'vant'
 
-import { Toast, Field, Icon, Uploader } from 'vant'
+import { Toast, Field, Icon, Uploader, Dialog } from 'vant'
 
 Vue.prototype.$http = http
 Vue.prototype.$msg = Toast
@@ -15,6 +15,7 @@ Vue.config.productionTip = false
 Vue.use(Field)
 Vue.use(Icon)
 Vue.use(Uploader)
+Vue.use(Dialog)
 
 new Vue({
   router,
