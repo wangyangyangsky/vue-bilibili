@@ -27,7 +27,6 @@ export default {
   },
   methods: {
     async userInfoData () {
-      console.log('进入页面')
       const res = await this.$http.get('/user/' + localStorage.getItem('id'), {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token')

@@ -6,13 +6,13 @@
         <td>头像</td>
         <td style="position:relative">
           <van-uploader class="uploader" preview-size="50px" :after-read="afterRead"/>
-          <img v-if="model.user_img" :src="model.user_img"  class="logo"  alt="">
-          <img v-cloak v-else class="logo" src="@/assets/default_img.jpg" alt="" >
+          <img v-if="model.user_img" :src="model.user_img" alt="">
+          <img v-else class="logo" src="@/assets/default_img.jpg" alt="" v-cloak>
         </td>
       </tr>
       <tr>
         <td>昵称</td>
-        <td @click="changeShow(1)">{{model.username}}</td>
+        <td @click="changeShow(1)">{{model.name}}</td>
       </tr>
       <tr>
         <td>UID</td>
@@ -20,12 +20,12 @@
       </tr>
       <tr>
         <td>性别</td>
-        <td v-if = model.gender>{{model.gender}}</td>
-        <td v-else>保密</td>
+        <td @click="ashow = true" v-if = model.gender>{{model.gender}}</td>
+        <td @click="ashow = true" v-else>保密</td>
       </tr>
       <tr>
         <td>出生日期</td>
-        <td>王小洋sky</td>
+        <td @click="cshow=true"></td>
       </tr>
       <tr>
         <td>个性签名</td>
@@ -34,13 +34,16 @@
     </table>
 
     <div class="option">
-      <a>退出登录</a>
+      <a @click="logout">退出登录</a>
       <a @click="$router.back()">返回空间</a>
     </div>
 
     <van-dialog v-model="show" title="请填入要修改的内容" show-cancel-button @confirm = "confirmClick">
       <van-field v-model="content" autofocus />
     </van-dialog>
+
+    <van-action-sheet v-model="ashow" :actions="actions" @select="onSelect" />
+    <van-calendar v-model="cshow" @confirm="onConfirm" />
   </div>
 </template>
 
@@ -52,7 +55,10 @@ export default {
       model: {},
       show: false,
       content: '',
-      temp: 0
+      temp: 0,
+      ashow: false,
+      cshow: false,
+      actions: [{ name: '男' }, { name: '女' }]
     }
   },
   components: {
@@ -99,6 +105,22 @@ export default {
         this.model.user_desc = this.content
       }
       this.UserUpdate()
+    },
+    onSelect (item) {
+      // 默认情况下点击选项时不会自动收起
+      this.ashow = false
+      this.model.gender = item.name
+      this.UserUpdate()
+    },
+    formatDate (date) {
+      return `${date.getMonth() + 1}/${date.getDate()}`
+    },
+    onConfirm (date) {
+      this.cshow = false
+      this.date = this.formatDate(date)
+    },
+    logout () {
+      window.localStorage.clear()
     }
   }
 }
@@ -138,15 +160,14 @@ export default {
   width: 50%;
   padding: 2.667vw 0;
   color: #505050;
-}
-
-.logo{
-  width: 12.26667vw;
-  height: 12.26667vw;
-  border-radius: 6.13333vw;
-  vertical-align: middle;
-  position: relative;
-  z-index: 2;
+  img{
+    width: 12.26667vw;
+    height: 12.26667vw;
+    border-radius: 6.13333vw;
+    vertical-align: middle;
+    position: relative;
+    z-index: 2;
+  }
 }
 
 .uploader{

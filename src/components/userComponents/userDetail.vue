@@ -1,6 +1,6 @@
 <template>
   <div class="userDetail">
-    <img v-if="userInfo.user_img" class="userLogo" src="@/assets/head_img.jpg" alt />
+    <img v-if="userInfo.user_img" class="userLogo" :src="userInfo.user_img" alt />
     <img v-else class="userLogo" src="@/assets/head_img.jpg" alt />
     <div class="relation">
       <div class="num">

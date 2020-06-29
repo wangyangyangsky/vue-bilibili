@@ -4,6 +4,7 @@ import register from '../views/register.vue'
 import login from '../views/login.vue'
 import userinfo from '../views/userinfo.vue'
 import edit from '../views/edit.vue'
+import home from '../views/Home.vue'
 
 const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push (location) {
@@ -13,6 +14,11 @@ VueRouter.prototype.push = function push (location) {
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/',
+    name: 'home',
+    component: home
+  },
   {
     path: '/register',
     name: 'register',
