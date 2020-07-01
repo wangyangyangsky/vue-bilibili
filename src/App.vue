@@ -9,6 +9,6 @@ body{
   margin: 0;
   padding: 0;
   box-sizing: content-box;
-  background-color: #f4f4f4;
+  background-color: #fff;
 }
 </style>

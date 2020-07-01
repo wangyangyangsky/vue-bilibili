@@ -5,6 +5,7 @@ import login from '../views/login.vue'
 import userinfo from '../views/userinfo.vue'
 import edit from '../views/edit.vue'
 import home from '../views/Home.vue'
+import download from '../views/download.vue'
 
 const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push (location) {
@@ -45,6 +46,11 @@ const routes = [
     meta: {
       istoken: true
     }
+  },
+  {
+    path: '/download',
+    name: 'download',
+    component: download
   }
   // {
   //   path: '/about',

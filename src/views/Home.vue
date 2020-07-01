@@ -1,9 +1,18 @@
 <template>
   <div>
     <nav-bar></nav-bar>
-    <van-tabs v-model="active" line-width="8vw" color="#fb7299">
+    <van-tabs v-model="active" color="#fb7299" swipeable>
       <van-tab v-for="(item,index) in category " :title="item.title" :key="index">
-        内容 {{ index }}
+        <detail :detailitem="catrgoryitem" v-for="(catrgoryitem,caindex) in item.list" :key="caindex">
+        </detail>
+        <van-list
+          v-model="item.loading"
+          :finished="item.finished"
+          finished-text="没有更多了"
+          @load="onLoad"
+          :immediate-check="false"
+        >
+        </van-list>
       </van-tab>
     </van-tabs>
   </div>
@@ -11,15 +20,20 @@
 
 <script>
 import NavBar from '../components/common/navBar.vue'
+import detail from '../components/home/detail.vue'
+
 export default {
   data () {
     return {
       category: [],
-      active: 0
+      active: 0,
+      loading: false,
+      finished: false
     }
   },
   components: {
-    NavBar
+    NavBar,
+    detail
   },
   created () {
     this.selectCategory()
@@ -28,17 +42,20 @@ export default {
     async selectCategory () {
       const res = await this.$http.get('/category')
       // this.category = res.data
-      console.log(res.data)
-      this.changeCategory(res.data)
+      this.category = this.changeCategory(res.data)
+      this.selectArticle()
     },
     changeCategory (data) {
+      // 对后端传来数据进行改造
       const newcategory = data.map((item, index) => {
         item.list = []
         item.page = 0
         item.pagesize = 10
+        item.finished = false
+        item.loading = true
         return item
       })
-      this.category = newcategory
+      return newcategory
     },
     async selectArticle () {
       const categoryitem = this.categoryItem()
@@ -50,11 +67,22 @@ export default {
       })
       categoryitem.list.push(...res.data)
       // 查出相关联视频
-      console.log(categoryitem)
+      // console.log(categoryitem)
+      categoryitem.loading = false
+      if (res.data.length < categoryitem.pagesize) {
+        categoryitem.finished = true
+      }
     },
     categoryItem () {
       const categoryitem = this.category[this.active]
       return categoryitem
+    },
+    onLoad () {
+      const categoryitem = this.categoryItem()
+      setTimeout(() => {
+        categoryitem.page += 1
+        this.selectArticle()
+      }, 1e3)
     }
   },
   watch: {

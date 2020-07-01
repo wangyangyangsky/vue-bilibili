@@ -12,7 +12,7 @@
     <div>
       <img src="@/assets/default_img.jpg" alt="">
     </div>
-    <div>下载APP</div>
+    <div @click="$router.push('download')">下载APP</div>
   </div>
 </template>
 
