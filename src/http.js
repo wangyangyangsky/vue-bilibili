@@ -1,6 +1,6 @@
 import axios from 'axios'
 import router from './router'
-import Vue from 'vue'
+// import Vue from 'vue'
 // import { config } from 'vue/types/umd'
 
 const http = axios.create({
@@ -31,7 +31,6 @@ http.interceptors.response.use(function (response) {
   // Do something with response error
   if (error.response.status === 401 || error.response.status === 402) {
     router.push('/login')
-    Vue.prototype.$msg.fail(error.response.data.message)
   }
   return Promise.reject(error)
 })

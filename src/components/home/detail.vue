@@ -1,7 +1,8 @@
 <template>
-  <div class="wrap" v-if="detailitem">
-    <div class="detailItem">
+  <div class="wrap" v-if="detailitem" @click="$router.push(`/article/${detailitem.id}`)">
+    <div class="detailItem" >
       <div class="imgwrap">
+        <div class="icon-play2 icon1" ></div>
         <img :src="detailitem.img" alt="">
       </div>
     </div>
@@ -27,10 +28,20 @@ export default {
     padding: 2.13333vw 1.33333vw;
     display: inline-block;
     box-sizing: border-box;
-    img{
-      width: 45.867vw;
-      height: 25.867vw;
-      display: block;
+    .imgwrap{
+      position: relative;
+      img{
+        width: 45.867vw;
+        height: 25.867vw;
+        display: block;
+      }
+      .icon1{
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        color: #fff;
+        padding: 1.33333vw 1.6vw;
+      }
     }
   }
   .title{

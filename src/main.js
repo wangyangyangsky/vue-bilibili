@@ -4,6 +4,8 @@ import App from './App.vue'
 import router from './router'
 import http from './http'
 import Vant from 'vant'
+import '@/assets/style.css'
+
 // import { Toast } from 'vant'
 
 // import { Toast, Field, Icon, Uploader, Dialog, ActionSheet, Cell, Calendar, Tab, Tabs, List } from 'vant'

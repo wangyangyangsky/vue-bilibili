@@ -6,6 +6,9 @@ import userinfo from '../views/userinfo.vue'
 import edit from '../views/edit.vue'
 import home from '../views/Home.vue'
 import download from '../views/download.vue'
+import article from '../views/article.vue'
+
+import { Toast } from 'vant'
 
 const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push (location) {
@@ -51,6 +54,11 @@ const routes = [
     path: '/download',
     name: 'download',
     component: download
+  },
+  {
+    path: '/article/:id',
+    name: 'article',
+    component: article
   }
   // {
   //   path: '/about',
@@ -66,7 +74,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if (!localStorage.getItem('id') && !localStorage.getItem('token') && to.meta.istoken) {
     router.push('/login')
-    Vue.prototype.$msg.fail('请重新登录')
+    Toast.fail('请重新登录')
     return
   }
   next()

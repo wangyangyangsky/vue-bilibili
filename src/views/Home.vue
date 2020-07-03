@@ -3,15 +3,15 @@
     <nav-bar></nav-bar>
     <van-tabs v-model="active" color="#fb7299" swipeable>
       <van-tab v-for="(item,index) in category " :title="item.title" :key="index">
-        <detail :detailitem="catrgoryitem" v-for="(catrgoryitem,caindex) in item.list" :key="caindex">
-        </detail>
         <van-list
           v-model="item.loading"
           :finished="item.finished"
-          finished-text="没有更多了"
+          finished-text="我也是有底线的"
           @load="onLoad"
           :immediate-check="false"
         >
+          <detail :detailitem="catrgoryitem" v-for="(catrgoryitem,caindex) in item.list" :key="caindex">
+          </detail>
         </van-list>
       </van-tab>
     </van-tabs>
@@ -70,6 +70,7 @@ export default {
       // console.log(categoryitem)
       categoryitem.loading = false
       if (res.data.length < categoryitem.pagesize) {
+        // 数据已经到底 下拉完成
         categoryitem.finished = true
       }
     },

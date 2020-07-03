@@ -6,9 +6,9 @@
         <td>头像</td>
         <td style="position:relative">
           <van-uploader class="uploader" preview-size="50px" :after-read="afterRead"/>
-          <img v-if="model.user_img" :src="model.user_img" alt="">
+          <img v-if="model.user_img" :src="model.user_img" alt=""/>
           <img v-else class="logo" src="@/assets/default_img.jpg" alt="" v-cloak>
-        </td>
+        </td> 
       </tr>
       <tr>
         <td>昵称</td>
@@ -90,7 +90,7 @@ export default {
       const res = await this.$http.post('/update/' + localStorage.getItem('id'), this.model)
       console.log(res)
       if (res.data.code === 200) {
-        this.$msg.fail('修改成功')
+        this.$toast.fail('修改成功')
       }
     },
     changeShow (index) {
