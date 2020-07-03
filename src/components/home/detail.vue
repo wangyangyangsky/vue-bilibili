@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap" v-if="detailitem" @click="$router.push(`/article/${detailitem.id}`)">
+  <div class="wrap" v-if="detailitem" @click="pathPush">
     <div class="detailItem" >
       <div class="imgwrap">
         <div class="icon-play2 icon1" ></div>
@@ -14,7 +14,15 @@
 export default {
   props: [
     'detailitem'
-  ]
+  ],
+  methods: {
+    pathPush () {
+      if (this.$route.path !== `/article/${this.detailitem.id}`) {
+        console.log(111)
+        this.$router.push(`/article/${this.detailitem.id}`)
+      }
+    }
+  }
 }
 </script>
 

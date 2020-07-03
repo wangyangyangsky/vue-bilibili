@@ -1,5 +1,5 @@
 <template>
-  <div class="editWrapper">
+  <div class="editWrapper" >
     <nav-bar></nav-bar>
     <table class="edit">
       <tr>
@@ -8,7 +8,7 @@
           <van-uploader class="uploader" preview-size="50px" :after-read="afterRead"/>
           <img v-if="model.user_img" :src="model.user_img" alt=""/>
           <img v-else class="logo" src="@/assets/default_img.jpg" alt="" v-cloak>
-        </td> 
+        </td>
       </tr>
       <tr>
         <td>昵称</td>

@@ -20,22 +20,28 @@
       <p><span class="icon-box-add"></span><span>下载</span></p>
       <p><span class="icon-redo2"></span><span>分享</span></p>
     </div>
+    <my-detail v-for="(item,index) in commendList" :detailitem="item" :key="index"></my-detail>
   </div>
 </template>
 
 <script>
 import NavBar from '../components/common/navBar.vue'
+import myDetail from '../components/home/detail.vue'
 export default {
   data () {
     return {
-      model: {}
+      model: {},
+      commendList: null
     }
   },
   components: {
-    NavBar
+    NavBar,
+    myDetail
   },
-  created () {
+  mounted () {
     this.articleItemData()
+    console.log(this.$route)
+    this.commendData()
   },
   methods: {
     async articleItemData () {
@@ -43,6 +49,17 @@ export default {
       const res = await this.$http.get('/article/' + this.$route.params.id)
       this.model = res.data[0]
       console.log(this.model)
+    },
+    async commendData () {
+      const res = await this.$http.get('/commend')
+      this.commendList = res.data
+      console.log(this.commendList)
+    }
+  },
+  watch: {
+    $route () {
+      console.log('路径变化了')
+      this.commendData()
     }
   }
 }

@@ -35,8 +35,9 @@ export default {
     NavBar,
     detail
   },
-  created () {
+  mounted () {
     this.selectCategory()
+    console.log(this.$route)
   },
   methods: {
     async selectCategory () {

@@ -22,7 +22,7 @@ export default {
     navBar,
     userDetail
   },
-  created () {
+  mounted () {
     this.userInfoData()
   },
   methods: {

@@ -21,7 +21,10 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: home
+    component: home,
+    meta: {
+      keepAlive: true
+    }
   },
   {
     path: '/register',
@@ -68,6 +71,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  mode: 'history',
   routes
 })
 

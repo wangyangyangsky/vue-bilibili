@@ -9,7 +9,7 @@
         <span>搜索感兴趣的东西找到你喜欢的</span>
       </a>
     </div>
-    <div>
+    <div @click="$router.push('/userinfo')">
       <img src="@/assets/default_img.jpg" alt="">
     </div>
     <div @click="$router.push('download')">下载APP</div>

@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <router-view/>
+    <keep-alive>
+      <!-- 保持页面缓存状态 行为不会被销毁  -->
+      <router-view v-if="$route.meta.keepAlive"/>
+    </keep-alive>
+    <router-view v-if="!$route.meta.keepAlive"/>
   </div>
 </template>
 
